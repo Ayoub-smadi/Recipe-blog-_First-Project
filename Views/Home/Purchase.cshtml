@@ -1,0 +1,122 @@
+﻿@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Purchase Recipe</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            color: white;
+        }
+
+        .card {
+            background-color: #0F172B;
+            padding: 20px;
+            border-radius: 10px;
+          
+            text-align: center;
+        }
+
+            .card h2 {
+                margin-top: 0;
+            }
+
+            .card img {
+                max-width: 100%;
+                height: auto;
+                border-radius: 10px;
+            }
+
+            .card form div {
+                margin: 15px 0;
+            }
+
+            .card form label {
+                display: block;
+                margin-bottom: 5px;
+            }
+
+            .card form input, .card form select {
+                width: 100%;
+                padding: 10px;
+                border: 1px solid #ccc;
+                border-radius: 5px;
+            }
+
+            .card form button {
+                background-color: orange;
+                color: white;
+                border: none;
+                padding: 10px 20px;
+                font-size: 16px;
+                cursor: pointer;
+                border-radius: 5px;
+            }
+
+                .card form button:hover {
+                    background-color: #e69500;
+                }
+    </style>
+</head>
+<body>
+    <div class="card">
+        <h2>Purchase @ViewBag.RecipeName</h2>
+        <img src="@Url.Content("~/RecipeImages/" + ViewBag.RecipeImage)" alt="Recipe Image">
+        <p>Price: @ViewBag.Price</p>
+
+        <form asp-action="CompletePurchase" asp-controller="Home" method="post" autocomplete="off">
+            @Html.AntiForgeryToken() <!-- Adds anti-forgery token for security -->
+
+            <input type="hidden" name="RecipeId" value="@ViewBag.RecipeId" />
+            <input type="hidden" name="PurchaseAmount" value="@ViewBag.Price" />
+
+            <div>
+                <label>Card Holder Name:</label>
+                <input name="CardHolderName" required />
+            </div>
+
+            <div>
+                <label>Card Number:</label>
+                <input name="CardNumber" required />
+            </div>
+
+            <div>
+                <label>Security Code:</label>
+                <input name="CardSecurityNumber" required pattern="\d{3,4}" title="Security code must be 3 or 4 digits" />
+            </div>
+
+            <div>
+                <label>Expiry Month:</label>
+                <select name="ExpiryMonth" required>
+                    @for (int month = 1; month <= 12; month++)
+                    {
+                        <option value="@month">@month.ToString("00")</option>
+                    }
+                </select>
+            </div>
+
+            <div>
+                <label>Expiry Year:</label>
+                <select name="ExpiryYear" required>
+                    @for (int year = DateTime.Now.Year; year <= DateTime.Now.Year + 10; year++)
+                    {
+                        <option value="@year">@year</option>
+                    }
+                </select>
+            </div>
+
+            <button type="submit">Buy Now</button>
+        </form>
+    </div>
+</body>
+</html>

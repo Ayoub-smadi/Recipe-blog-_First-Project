@@ -1,0 +1,45 @@
+﻿@model IEnumerable<Recipe__MVCProject.Models.Category>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h1>Category</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Category Name
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Categoryimage)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @item.Categoryname
+                </td>
+                <td>
+                    <img src=@Url.Content("~/Images/"+item.Categoryimage)
+                         asp-append-version="true" style="border-radius:20%;" width="200" height="200" />
+
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.Categoryid">Edit</a> |
+                    <a asp-action="Details" asp-route-id="@item.Categoryid">Details</a> |
+                    <a asp-action="Delete" asp-route-id="@item.Categoryid">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

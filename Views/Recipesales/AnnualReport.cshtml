@@ -1,0 +1,35 @@
+﻿@model IEnumerable<dynamic>
+
+@{
+    ViewData["Title"] = "Annual Report";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h1>Annual Report</h1>
+
+<p>Report Period: @ViewBag.StartDate.ToShortDateString() - @ViewBag.EndDate.ToShortDateString()</p>
+
+@if (ViewBag.Message != null)
+{
+    <p>@ViewBag.Message</p>
+}
+else
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Year</th>
+                <th>Total Amount</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.Year</td>
+                    <td>@item.TotalAmount</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}

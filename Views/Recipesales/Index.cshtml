@@ -1,0 +1,58 @@
+﻿@model IEnumerable<Recipe__MVCProject.Models.Recipesale>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h1>Recipesales</h1>
+
+<p>
+    <a asp-action="Create">Create New</a> |
+    <a asp-action="SalesReport">View Sales Report</a>
+    <a asp-action="SalesChart">SalesChart</a>
+</p>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Saledate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Amount)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Recipe)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.User)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Saledate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Amount)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Recipe.Recipeid)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.User.Userid)
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.Saleid">Edit</a> |
+                    <a asp-action="Details" asp-route-id="@item.Saleid">Details</a> |
+                    <a asp-action="Delete" asp-route-id="@item.Saleid">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

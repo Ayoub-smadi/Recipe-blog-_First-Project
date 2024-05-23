@@ -1,0 +1,132 @@
+﻿@model Recipe__MVCProject.Models.User
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>User Profile - RecipeBlog</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <style>
+        /* Custom styles */
+        body {
+            background-color: #f8f9fa;
+        }
+
+        .container {
+            margin-top: 20px;
+        }
+
+        .card {
+            border: none;
+            border-radius: 10px;
+        }
+
+        .btn-primary {
+            background-color: #0F172B;
+            border-color: #0F172B;
+        }
+
+            .btn-primary:hover {
+                background-color: #0F172B;
+                border-color: #0F172B;
+            }
+
+        .text-primary {
+            color: #0F172B !important;
+        }
+
+        .text-secondary {
+            color: orange !important;
+        }
+    </style>
+</head>
+<body>
+    <div class="container my-5">
+        <h2 class="text-center text-primary mb-4">User Profile</h2>
+        <div class="card shadow-lg p-4">
+            <div class="text-center mb-3">
+                <h4 class="text-secondary">Welcome @Model.Username</h4>
+            </div>
+
+            <form asp-action="UpdateProfile" method="post" enctype="multipart/form-data" class="needs-validation" novalidate>
+                <div class="form-group mb-3">
+                    <label for="Username" class="form-label">Username:</label>
+                    <input type="text" class="form-control" id="Username" name="Username" value="@Model.Username" required>
+                    <div class="invalid-feedback">
+                        Please enter your username.
+                    </div>
+                </div>
+
+                <div class="form-group mb-3">
+                    <label for="ImageFile" class="form-label">Profile Image:</label>
+                    <input type="file" class="form-control-file" id="ImageFile" name="ImageFile">
+                </div>
+
+                <button type="submit" class="btn btn-primary btn-block">Save Changes</button>
+            </form>
+
+            <div class="mt-4 text-center">
+                <!-- Show current profile image -->
+                @if (!string.IsNullOrEmpty(Model.Profileimage))
+                {
+                    <div>
+                        <img src="~/UserImages/@Model.Profileimage" alt="User Image" class="img-thumbnail" style="max-width: 200px; max-height: 200px;" />
+                    </div>
+                }
+                else
+                {
+                    <div>
+                        <!-- Show default image if user does not have a profile image -->
+                        <img src="~/Images/default-user-image.png" alt="Default User Image" class="img-thumbnail" style="max-width: 200px; max-height: 200px;" />
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        (function () {
+            'use strict';
+            window.addEventListener('load', function () {
+                var forms = document.getElementsByClassName('needs-validation');
+                var validation = Array.prototype.filter.call(forms, function (form) {
+                    form.addEventListener('submit', function (event) {
+                        if (form.checkValidity() === false) {
+                            event.preventDefault();
+                            event.stopPropagation();
+                        }
+                        form.classList.add('was-validated');
+                    }, false);
+                });
+            }, false);
+        })();
+    </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>

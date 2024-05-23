@@ -1,0 +1,123 @@
+﻿@model (IEnumerable<User> Chefs, IEnumerable<Category> Categories, IEnumerable<Testimonial> Testimonials)
+
+@{
+    Layout = "~/Views/Shared/_HomeLayout.cshtml";
+}
+
+<!-- Navbar & Hero Start -->
+<div class="container-xxl py-5 bg-dark hero-header mb-5">
+    <div class="container my-5 py-5">
+        <div class="row align-items-center g-5">
+            <div class="col-lg-6 text-center text-lg-start">
+                <h1 class="display-3 text-white animated slideInLeft">Enjoy the Best Recipes<br>with Top Chefs</h1>
+                <p class="text-white animated slideInLeft mb-4 pb-2">Discover a world of rich tastes and comforting flavors with our collection of recipes. From classic home-cooked meals to exciting modern twists, every dish promises a unique culinary journey.</p>
+            </div>
+            <div class="col-lg-6 text-center text-lg-end overflow-hidden">
+                <img class="img-fluid" src="~/Home/img/HerooImg.png" alt="">
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Navbar & Hero End -->
+<!-- Team Members Start -->
+<div class="container-xxl py-5">
+    <div class="container-xxl pt-5 pb-3">
+        <div class="container">
+            <div class="text-center wow fadeInUp" data-wow-delay="0.1s">
+                <h5 class="section-title ff-secondary text-center text-primary fw-normal">Team Members</h5>
+                <h1 class="mb-5">Most Popular Chefs</h1>
+            </div>
+            <div class="row g-4">
+                @foreach (var chef in Model.Chefs)
+                {
+                    <div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
+                        <div class="team-item text-center rounded overflow-hidden">
+                            <div class="rounded-circle overflow-hidden m-4">
+                                <a asp-action="getRecipeByChefId" asp-route-Categoryid="@chef.Userid">
+                                    <img src="@Url.Content("~/UserImages/" + chef.Profileimage)" asp-append-version="true" width="200" height="200" alt="">
+                                </a>
+                            </div>
+                            <h3 class="mb-0">@chef.Username</h3>
+                            <div class="d-flex justify-content-center mt-3">
+                                <a class="btn btn-square btn-primary mx-1" asp-action="getRecipeByChefId" asp-route-Userid="@chef.Userid"><i class="fas fa-utensils"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Team Members End -->
+<!-- Categories Start -->
+<div class="container-xxl pt-5 pb-3">
+    <div class="container">
+        <div class="text-center wow fadeInUp" data-wow-delay="0.1s">
+            <h5 class="section-title ff-secondary text-center text-primary fw-normal">Categories</h5>
+            <h1 class="mb-5">Most Popular Categories</h1>
+        </div>
+        <div class="row g-4">
+            @foreach (var category in Model.Categories)
+            {
+                <div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
+                    <div class="team-item text-center rounded overflow-hidden">
+                        <div class="rounded-circle overflow-hidden m-4">
+                            <a asp-action="getRecipybycategoryId" asp-route-Categoryid="@category.Categoryid">
+                                <img src="@Url.Content("~/Images/" + category.Categoryimage)" asp-append-version="true" width="200" height="200" alt="">
+                            </a>
+                        </div>
+                        <h3 class="mb-0">@category.Categoryname</h3>
+                        <div class="d-flex justify-content-center mt-3">
+                            <a class="btn btn-square btn-primary mx-1" asp-action="getRecipybycategoryId" asp-route-Categoryid="@category.Categoryid"><i class="fab fa-facebook-f"></i></a>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+<!-- Categories End -->
+<!-- Testimonials Start -->
+<div class="container-xxl py-5 wow fadeInUp" data-wow-delay="0.1s">
+    <div class="container">
+        <div class="text-center">
+            <h5 class="section-title ff-secondary text-center text-primary fw-normal">Testimonial</h5>
+            <h1 class="mb-5">Our Clients Say!!!</h1>
+        </div>
+        <div class="owl-carousel testimonial-carousel">
+            @foreach (var testimonial in Model.Testimonials)
+            {
+                <div class="testimonial-item bg-transparent border rounded p-4">
+                    <i class="fa fa-quote-left fa-2x text-primary mb-3"></i>
+                    <p>@testimonial.Testimonialcontent</p>
+                    <div class="d-flex align-items-center">
+                        <img class="img-fluid flex-shrink-0 rounded-circle" src="@Url.Content("~/UserImages/" + testimonial.User.Profileimage)" style="width: 50px; height: 50px;">
+                        <div class="ps-3">
+                            <h5 class="mb-1">@testimonial.User.Username</h5>
+                            <small>Recipe: @testimonial.Userid.Value</small>
+                        
+                        </div>
+                    </div>
+                </div>
+            }
+
+        </div>
+    </div>
+</div>
+
+<!-- Testimonials End -->
+<!-- إضافة JavaScript الخاص بـ Owl Carousel -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-KyZXEAg3QhqLMpG8r+8fhAXLR+XQ5D0sjV2L8/5I5Bb2z4PA5IpFNEVUG60D+kzM4E5QTR5jWqsBWuB+TD7Xqw==" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js" integrity="sha512-OgW4HeXgn2en6Uww8XM95I1SPxrkE8G7+bl5Clv/ZPVpP7FZmK0EjF1QKuErfAgS9cGt8RB+Y15lA7Kj7yVJdA==" crossorigin="anonymous"></script>
+<script>
+    $(document).ready(function () {
+        $(".testimonial-carousel").owlCarousel({
+            items: 1,
+            loop: true,
+            autoplay: true,
+            autoplayTimeout: 5000,
+            dots: true,
+            nav: false
+        });
+    });
+</script>

@@ -1,0 +1,114 @@
+﻿
+@model User
+
+@{
+
+    Layout = "~/Views/shared/_Login&RegisterLayout.cshtml";
+}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>Restoran - Bootstrap Restaurant Template</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta content="" name="keywords">
+    <meta content="" name="description">
+
+    <!-- Favicon -->
+    <link href="~/Home/img/favicon.ico" rel="icon">
+
+    <!-- Google Web Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;600&family=Nunito:wght@600;700;800&family=Pacifico&display=swap" rel="stylesheet">
+
+    <!-- Icon Font Stylesheet -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
+
+    <!-- Libraries Stylesheet -->
+    <link href="lib/animate/animate.min.css" rel="stylesheet">
+    <link href="lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
+    <link href="lib/tempusdominus/css/tempusdominus-bootstrap-4.min.css" rel="stylesheet" />
+
+    <!-- Customized Bootstrap Stylesheet -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Template Stylesheet -->
+    <link href="css/style.css" rel="stylesheet">
+    <style>
+        .form-group.form-button {
+            display: flex; /* Use flexbox for layout */
+            justify-content: space-between; /* Distribute items evenly along the main axis */
+        }
+
+        .custom-btn {
+            background-color: orange !important;
+            color: black !important;
+            border-color: orange !important; /* (Optional) Change border color if needed */
+            padding: 10px 20px; /* Adjust padding as needed */
+            margin-right: 10px; /* Add margin between buttons */
+        }
+
+            .custom-btn:last-child {
+                margin-right: 0; /* Remove margin from the last button */
+            }
+    </style>
+    <!-- Custom Stylesheet -->
+    <style>
+
+
+        .main {
+            background-color: #0F172B;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Sign up form -->
+    <section class="signup">
+        <div class="container">
+            <div class="signup-content">
+                <div class="signup-form">
+                    <h2 class="form-title">Sign up</h2>
+                    <form asp-action="Register" method="POST" class="register-form" id="register-form">
+                        <div class="form-group">
+                            <label for="name"><i class="zmdi zmdi-account material-icons-name"></i></label>
+                            <input asp-for="Email" type="email" placeholder="Email" required />
+                        </div>
+
+                        <div class="form-group">
+                            <label for="userName"><i class="zmdi zmdi-account material-icons-name"></i></label>
+                            <input type="text" name="userName" id="userName" placeholder="User Name" required />
+                        </div>
+                        <div class="form-group">
+                            <label for="pass"><i class="zmdi zmdi-lock"></i></label>
+                            <input type="password" name="Password" id="pass" placeholder="Password" required />
+                        </div>
+
+
+                        <div class="form-group form-button">
+                           
+                            <input type="submit" name="roleType" class="form-submit custom-btn" value="Register as Chef" />
+                            <input type="submit" name="roleType" class="form-submit custom-btn" value="Register as User" />
+                           
+                        </div>
+
+                        <div asp-validation-summary="All" class="text-danger"></div>
+
+                    </form>
+                </div>
+                <div class="signup-image">
+                    <figure><img src="https://img.freepik.com/free-vector/sign-up-concept-illustration_114360-7885.jpg?t=st=1715094516~exp=1715098116~hmac=a795a22a75338d28d285281cff21238cdbba663a36c5a58f2923e0b7d896669d&w=740" alt="sing up image"></figure>
+                    <a asp-action="LogIn" class="signup-image-link">I am already member</a>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- الجزء الأخير من ملف View لنموذج التسجيل -->
+
+
+</body>
+</html>

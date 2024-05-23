@@ -1,0 +1,54 @@
+﻿@model Recipe__MVCProject.Models.Recipe
+@{
+    Layout = "~/Views/Shared/_HomeLayout.cshtml"; // Using a chef-specific layout if you have one; otherwise, use your site's main layout.
+}
+
+<h2>Add New Recipe</h2>
+
+<form asp-action="Create" asp-controller="Recipes" method="post" enctype="multipart/form-data">
+    <div class="form-group">
+        <label asp-for="Name" class="control-label">Recipe Name</label>
+        <input asp-for="Name" class="form-control" />
+        <span asp-validation-for="Name" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Description" class="control-label">Description</label>
+        <textarea asp-for="Description" class="form-control"></textarea>
+        <span asp-validation-for="Description" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Ingredients" class="control-label">Ingredients</label>
+        <textarea asp-for="Ingredients" class="form-control"></textarea>
+        <span asp-validation-for="Ingredients" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Instructions" class="control-label">Instructions</label>
+        <textarea asp-for="Instructions" class="form-control"></textarea>
+        <span asp-validation-for="Instructions" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Price" class="control-label">Price</label>
+        <input asp-for="Price" type="number" step="any" class="form-control" />
+        <span asp-validation-for="Price" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Addedtime" class="control-label">Added Time</label>
+        <input asp-for="Addedtime" type="datetime-local" class="form-control" />
+        <span asp-validation-for="Addedtime" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="ImageFile" class="control-label"></label>
+        <input asp-for="ImageFile" class="form-control" />
+        <span asp-validation-for="ImageFile" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <button type="submit" class="btn btn-success">Submit Recipe</button>
+    </div>
+</form>

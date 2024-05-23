@@ -1,0 +1,51 @@
+﻿@model IEnumerable<dynamic> // استخدم نوع النموذج المناسب إذا كنت تعرفه
+
+@{
+    ViewBag.Title = "Sales Chart";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml"; // استبدل _Layout.cshtml باسم التخطيط الذي تستخدمه
+}
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-header">
+                Sales Chart
+            </div>
+            <div class="card-body">
+                <canvas id="salesChart" width="400" height="400"></canvas>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js"></script>
+    <script>
+        var salesData = @Html.Raw(Json.Serialize(Model)); // تحويل البيانات إلى جافاسكريبت بشكل صحيح
+
+        // استخدم بيانات المبيعات لإنشاء المخطط
+        var ctx = document.getElementById('salesChart').getContext('2d');
+        var salesChart = new Chart(ctx, {
+            type: 'line', // يمكنك استخدام نوع المخطط الذي تفضله، مثل line أو bar أو pie وغيرها
+            data: {
+                labels: salesData.map(sale => sale.Year + '-' + sale.Month), // استخدام السنة والشهر كعناوين للمحور الأفقي
+                datasets: [{
+                    label: 'Total Sales Amount',
+                    data: salesData.map(sale => sale.TotalAmount), // استخدام قائمة المبيعات كقيم للمحور العمودي
+                    backgroundColor: 'rgba(255, 99, 132, 0.2)', // لون الخلفية
+                    borderColor: 'rgba(255, 99, 132, 1)', // لون الحدود
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                scales: {
+                    yAxes: [{
+                        ticks: {
+                            beginAtZero: true 
+                        }
+                    }]
+                }
+            }
+        });
+    </script>
+}

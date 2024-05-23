@@ -1,0 +1,73 @@
+﻿@model Recipe__MVCProject.Models.Payment
+
+@{
+    ViewData["Title"] = "Details";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h1>Details</h1>
+
+<div>
+    <h4>Payment</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Amount)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Amount)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Paymentstatus)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Paymentstatus)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Transactiondate)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Transactiondate)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Cardid)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Cardid)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Cardholdername)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Cardholdername)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Cardsecuritynumber)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Cardsecuritynumber)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Cardexpirydate)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Cardexpirydate)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Recipe)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Recipe.Recipeid)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.User)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.User.Userid)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model?.Paymentid">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>
